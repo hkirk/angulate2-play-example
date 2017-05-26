@@ -1,10 +1,11 @@
 package com.lucidchart
 
-import scalajs.js
-import angulate2._
+import angulate2.std._
+
+import scala.scalajs.js
 
 @Data
 case class Hero(
   id: Int,
   name: String
-)
+) extends js.Object

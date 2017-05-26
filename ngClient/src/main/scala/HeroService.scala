@@ -1,30 +1,25 @@
 package com.lucidchart
 
-import angulate2._
-import angulate2.http._
-import rxjs.core.Observable
-import scala.concurrent.Future
+import angulate2.std._
+import rxjs.RxPromise
+
 import scala.scalajs.js
-import scala.scalajs.concurrent.JSExecutionContext.Implicits.queue
 
 @Injectable()
-class HeroService(http: Http) {
+class HeroService {
+  private val heroesPromise = RxPromise.resolve(Heroes.all)
+
   val heroesUrl = "app/heroes"
 
-  def getHeroes(): Future[js.Array[Hero]] = {
-    //http.get(heroesUrl).toFuture.map(response => response.json())
-    Future.successful(Heroes.all)
-  }
+  def getHeroes(): RxPromise[js.Array[Hero]] = heroesPromise
 
-  def getHero(id: Int): Future[Option[Hero]] = {
-    getHeroes().map { heroes =>
-      heroes.find(_.id == id)
-    }
-  }
+  def getHero(id: Int): RxPromise[Hero] =
+    heroesPromise.map( all => Heroes.all.find(_.id==id).get )
+
 }
 
 object Heroes {
-  val all: js.Array[Hero] = js.Array(
+  val all = @@@(
     Hero(11, "Mr. Nice"),
     Hero(12, "Narco"),
     Hero(13, "Bombasto"),

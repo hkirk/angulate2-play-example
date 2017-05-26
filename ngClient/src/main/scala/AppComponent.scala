@@ -1,6 +1,6 @@
 package com.lucidchart
 
-import angulate2._
+import angulate2.std._
 import angulate2.http._
 import angulate2.router._
 import org.scalajs.dom

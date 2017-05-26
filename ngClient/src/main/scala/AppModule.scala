@@ -1,15 +1,17 @@
 package com.lucidchart
 
-import angulate2._
-import scala.scalajs.js
+import angulate2.std._
+import angulate2.forms.FormsModule
+import angulate2.http.HttpModule
+import angulate2.platformBrowser.BrowserModule
 
 @NgModule(
-  imports = js.Array(
+  imports = @@[
     BrowserModule,
     FormsModule,
     HttpModule,
-    Routes.routing
-  ),
+    AppRoutes
+  ],
   declarations = @@[
     AppComponent,
     HeroDetailComponent,
