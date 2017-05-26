@@ -10,35 +10,59 @@
 
     <link rel="stylesheet" href="/assets/styles.css" />
 
-    <script src="https://unpkg.com/systemjs@@0.19.40/dist/system-polyfills.js"></script>
-    <script src="https://unpkg.com/systemjs@@0.19.40/dist/system.js"></script>
-
-    <script src="https://unpkg.com/core-js@@2.4.1/client/core.js"></script>
-    <script src="https://unpkg.com/reflect-metadata@@0.1.8"></script>
-    <script src="https://unpkg.com/rxjs@@5.3.0/bundles/Rx.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.4.1/shim.min.js"></script>
     <script src="https://unpkg.com/zone.js@@0.7.4"></script>
+    <script src="https://unpkg.com/reflect-metadata@@0.1.8/Reflect.js"></script>
+    <script src="https://unpkg.com/systemjs@@0.19.40/dist/system.src.js"></script>
 
-    <script src="https://unpkg.com/@@angular/core@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/common@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/compiler@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/forms@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/http@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/platform-browser@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/platform-browser-dynamic@@2.4.0"></script>
-    <script src="https://unpkg.com/@@angular/router@@3.4.0"></script>
-    <script src="https://unpkg.com/@@angular/upgrade@@2.4.0"></script>
-
-    <script src="@routes.Assets.versioned("ngclient-opt.js")"></script>
-    <!-- <script src="@routes.Assets.versioned("ngclient-jsdeps.js")"></script> -->
-    <script src="@routes.Assets.versioned("ngclient-sjsx.js")"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var platform = ng.platformBrowserDynamic.platformBrowserDynamic();
-            platform.bootstrapModule(com.lucidchart.AppModule);
-        });
+            System.config({
+                paths: {
+                    // paths serve as alias
+//                    'npm:': 'node_modules/'
+                },
+                // map tells the System loader where to look for things
+                map: {
+                    // our app is within the target/scala-2.11 folder
+                    app: '',
+                    // angular bundles
+                    '@@angular/core': 'https://unpkg.com/@@angular/core@@2.4.0/bundles/core.umd.js',
+                    '@@angular/common': 'https://unpkg.com/@@angular/common@@2.4.0/bundles/common.umd.js',
+                    '@@angular/compiler': 'https://unpkg.com/@@angular/compiler@@2.4.0/bundles/compiler.umd.js',
+                    '@@angular/platform-browser': 'https://unpkg.com/@@angular/platform-browser@@2.4.0/bundles/platform-browser.umd.js',
+                    '@@angular/platform-browser-dynamic': 'https://unpkg.com/@@angular/platform-browser-dynamic@@2.4.0/bundles/platform-browser-dynamic.umd.js',
+                    '@@angular/http': 'https://unpkg.com/@@angular/http@@2.4.0/bundles/http.umd.js',
+                    '@@angular/router': 'https://unpkg.com/@@angular/router@@3.4.0/bundles/router.umd.js',
+                    '@@angular/forms': 'https://unpkg.com/@@angular/forms@@2.4.0/bundles/forms.umd.js',
+                    '@@angular/upgrade': 'https://unpkg.com/@@angular/upgrade@@2.4.0/bundles/upgrade.umd.js',
+                    // other libraries
+                    'rxjs': 'https://unpkg.com/rxjs@@5.3.0/',
+                    'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js'
+                },
+                // packages tells the System loader how to load when no filename and/or no extension
+                packages: {
+                    app: {
+                        // the main script to be loaded from target/scala-2.11
+                        main: 'assets/ngclient-sjsx.js', //@routes.Assets.versioned("ngclient-sjsx.js")',
+                        map: {
+                            // the name of the Scala.js module to be loaded
+                            scalaModule: 'assets/ngclient-opt.js', //@routes.Assets.versioned("ngclient-opt.js")'
+                        },
+                        format: 'cjs',
+                        defaultExtension: 'js'
+                    },
+                    rxjs: {
+                        defaultExtension: 'js'
+                    }
+                }
+            });
+    </script>
+
+    <script>
+        System.import('app').catch(function(err){ console.error(err); });
     </script>
 
     <body>
-        <my-app></my-app>
+        <my-app>Loading...</my-app>
     </body>
 </html>

@@ -9,15 +9,15 @@ import scala.scalajs.js
 @Component(
   selector = "my-app",
   styleUrls = js.Array("assets/app.component.css"),
-  template = """
-<h1>{{title}}</h1>
-    <nav>
-        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-        <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
-    </nav>
-<router-outlet></router-outlet>
-""",
-  providers = @@[HeroService]
+  template =
+    """
+      |<h1>{{title}}</h1>
+      |    <nav>
+      |        <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      |        <a routerLink="/heroes" routerLinkActive="active">Heroes</a>
+      |    </nav>
+      |<router-outlet></router-outlet>
+    """.stripMargin
 )
 class AppComponent {
   val title = "Tour of Heroes"

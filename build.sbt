@@ -45,8 +45,8 @@ lazy val ngClient = project.in(file("ngClient")).
     //),
     libraryDependencies ++= Seq(
       "org.scala-js" %%% "scalajs-dom" % "0.9.0"
-    )//,
-    //ngBootstrap := Some("com.lucidchart.AppComponent")
+    ),
+    ngBootstrap := Some("com.lucidchart.AppModule")
   )
 
 lazy val shared = (crossProject.crossType(CrossType.Pure) in file("shared")).
